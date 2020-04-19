@@ -32,7 +32,7 @@
 
 		<snippet name="StoreEntry" class="">
 			<Panel class="store-panel__carousel__item"  hittest="true">
-				<ItemImage id="StoreItemImage" class="store-panel__carousel__item__image" scaling="stretch-to-fit-x-preserve-aspect"  >
+				<ItemImage id="StoreItemImage" class="store-panel__carousel__item__image" scaling="stretch-to-fit-preserve-aspect"  >
 					<Label id="StoreItemStattrak" class="store-panel__carousel__item__stattrak hidden" text="#CSGO_KillEater_Hud"/>
 					<Label id="StoreItemNew" class="store-panel__carousel__item__stattrak hidden" text="#Store_Price_New"/>
 				</ItemImage>
@@ -94,6 +94,42 @@
 			</RadioButton>
 		</snippet>
 
+		<snippet name="CouponsSearchBarItemSnippet" class="">
+			<Panel class="store-panel__carousel__item"  hittest="true">
+				<Panel class='top-bottom-flow full-width'>
+					<Panel class='left-right-flow full-width store-panel__carousel__coupons_search_topbar'>
+						<TextEntry id="CouponsSearchBarFilterText"
+							class="store-panel__carousel__coupons_searchtext"
+							placeholder="#inv_search_default"
+							ontextentrysubmit="$.DispatchEvent( 'FilterStoreCouponsDisplay', 'apply' )"
+							onfocus="" />
+						<Button id="CouponsSearchBarFilterClear"
+							onactivate="$.DispatchEvent( 'FilterStoreCouponsDisplay', 'clear' )"
+							class="IconButton hidden" >
+							<Image texturewidth="24" textureheight="24" src="file://{images}/icons/ui/cancel.svg"/>
+						</Button>
+						<TextButton id="CouponsSearchBarFilterButton"
+							class="store-panel__carousel__coupons_searchbtn store-sale-tag__text"
+							onactivate="$.DispatchEvent( 'FilterStoreCouponsDisplay', 'apply' )"
+							text="#store_btn_filter_coupons"/>
+					</Panel>
+					<Panel class='left-right-flow full-width store-panel__carousel__coupons_search_bottombar'>
+						<Label id="CouponsSearchBarFilterError"
+							class="store-panel__tournament-label hidden"
+							text="#store_btn_filter_coupons_not_found"/>
+						<TextButton id="CouponsSearchBarFilterBrowse"
+							class="store-panel__carousel__coupons_searchbtn store-sale-tag__text"
+							onactivate="$.DispatchEvent( 'FilterStoreCouponsDisplay', 'browse' )"
+							text="#store_btn_filter_coupons_browse"/>
+					</Panel>
+				</Panel>
+			</Panel>
+		</snippet>
+
+		<snippet name="CouponsSearchBarItemDummy">
+			<Panel class="hidden" hittest="false"></Panel>
+		</snippet>
+
 		<snippet name="TournamentStore">
 			<Button class="store-panel__tournament-banner store-panel__tournament-banner__buyitems"
 				onactivate="$.DispatchEvent( 'ShowTournamentStore' )">
@@ -129,7 +165,7 @@
 				</Panel>
 				<Label id="StorePanelTournamentSaleTagLabel"
 					class="store-panel__tournament-saletag hidden" html="false"
-					text="50%"/>
+					text="#store_tournament_price_reduction"/>
 				<Label id="StorePanelTournamentLabel"
 					class="store-panel__tournament-label" html="true"
 					text="#CSGO_PickEm_Buy_Items"/>
@@ -174,7 +210,7 @@
 
 	</snippets>
 
-	<Panel class="news-panel news-panel--store-container" useglobalcontext="true">
+	<Panel class="news-panel news-panel--store-container MainMenuModeOnly" useglobalcontext="true">
 		<Panel class="store-panel-license-banner hidden" id="StorePanelLicenseBanner">
 			<Label class="store-panel-license-banner__text" id="StorePanelLicenseBannerText"
 				html="true" text="#SFUI_LoginLicenseAssist_NoOnlineLicense"/>
