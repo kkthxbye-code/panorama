@@ -28,6 +28,7 @@
     $.DefineEvent( 'OpenInventory', 0, 'no args', 'opens the inventory menu from anywhere.' );
     $.DefineEvent( 'OpenWatchMenu', 0, 'no args', 'opens the watch menu from anywhere.' );
     $.DefineEvent( 'OpenStatsMenu', 0, 'no args', 'opens the stats page from anywhere.' );
+    $.DefineEvent( 'OpenSubscriptionUpsell', 0, 'no args', 'Open the upsell popup' );
     $.DefineEvent( 'OpenSidebarPanel', 1, 'auto close', 'open the sidebar from a abutton click from anywhere pass setting if you wasnt it to autoclose' );
     $.DefineEvent( 'StartDecodeableAnim', 0, 'no args', 'tells the decode panel to play the animation' );
     $.DefineEvent( 'HideMainMenuNewsPanel', 0, 'no args', 'hide mainmenu news panel' )
@@ -97,6 +98,7 @@
     $.DefineEvent( 'MainMenu_OnGoToCharacterLoadoutPressed', 0, '', '' );
     $.DefineEvent( 'MainMenu_OnLockVanityModelToggle', 0, '', '' );
 	$.DefineEvent( 'SettingsMenu_NavigateToSetting', 2, 'category, settingPanelID', 'Takes cateogry eg "GAME" or "KBMOUSE" and contained setting ID, opens that category and scrolls to the settting matching the id.' );
+	$.DefineEvent( 'SettingsMenu_NavigateToSettingPanel', 2, 'category, settingPanel', 'Navigates to a setting by panel handle' );
 
 	$.DefinePanelEvent( "MainMenu_PromotedSettingsViewed", 0, "", "Fired when user views new settings." )
 

@@ -247,8 +247,13 @@ var HudWinPanel = ( function()
 		_m_arrTimelineEvents = _ExtractTimelineEvents( arrEvents );
 		_m_arrPersonalDamageEvents = _ExtractLivingEnemies( arrEvents );
 
-		var FinalTOdds = _m_arrTimelineEvents[ _m_arrTimelineEvents.length - 1 ][ 'terrorist_odds' ];
-		_m_winningTeam = FinalTOdds == 100 ? 2 : FinalTOdds == 0 ? 3 : '';
+		_m_winningTeam = '';
+
+		if ( _m_arrTimelineEvents.length > 0 )
+		{
+			var FinalTOdds = _m_arrTimelineEvents[ _m_arrTimelineEvents.length - 1 ][ 'terrorist_odds' ];
+			_m_winningTeam = FinalTOdds == 100 ? 2 : FinalTOdds == 0 ? 3 : '';
+		}
 
 		_m_xRange = _m_arrTimelineEvents.length + _m_arrPersonalDamageEvents.length + 1.5;
 		_m_timeslice = TOTAL_TIME_REVEAL / _m_xRange;
@@ -600,10 +605,10 @@ var HudWinPanel = ( function()
 		                                                                                                      
 		if ( oDamage )
 		{
-			var healthRemoved = oDamage[ 'health_removed' ];
-			var nHits = oDamage[ 'num_hits' ];
-			var returnedHealthRemoved = oDamage[ 'return_health_removed' ];
-			var nReturnHits = oDamage[ 'num_return_hits' ];
+			var healthRemoved = oDamage[ 'health_removed' ] ? oDamage[ 'health_removed' ] : 0;
+			var nHits = oDamage[ 'num_hits' ] ? oDamage[ 'num_hits' ] : 0;
+			var returnedHealthRemoved = oDamage[ 'return_health_removed' ] ? oDamage[ 'return_health_removed' ] : 0;
+			var nReturnHits = oDamage[ 'num_return_hits' ] ? oDamage[ 'num_return_hits' ] : 0;
 
 			_UpdateDamage( victimData[ 'xuid'], healthRemoved, nHits, returnedHealthRemoved, nReturnHits );
 		}

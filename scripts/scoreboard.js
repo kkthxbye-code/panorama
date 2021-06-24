@@ -1483,7 +1483,10 @@ var Scoreboard = ( function()
 					var isEnemyTeamMuted = GameInterfaceAPI.GetSettingString( "cl_mute_enemy_team" ) == "1";
 					var isEnemy = MockAdapter.ArePlayersEnemies( oPlayer.m_xuid, GetLocalPlayerId() );
 
-					oPlayer.m_elPlayer.SetHasClass( 'muted', isMuted || ( isEnemy && isEnemyTeamMuted ) );
+					var hasComAbusePenalty = MockAdapter.HasCommunicationAbuseMute( oPlayer.m_xuid );
+					var isLocalPlayer = oPlayer.m_xuid == GetLocalPlayerId();
+
+					oPlayer.m_elPlayer.SetHasClass( 'muted', isMuted || ( isEnemy && isEnemyTeamMuted ) || ( isLocalPlayer && hasComAbusePenalty ));
 
 				}
 				break;
@@ -1529,7 +1532,7 @@ var Scoreboard = ( function()
 									elSkillGroupImage.AddClass( "hidden" );
 								}
 		
-								elSkillGroupImage.SetImage( imagepath );								
+								elSkillGroupImage.SetImage( imagepath );
 							}
 						}
 					}
@@ -1539,6 +1542,7 @@ var Scoreboard = ( function()
 			case 'rank':
 				fn = function( oPlayer, bSilent = false )
 				{
+					
 					var newStatValue = MockAdapter.GetPlayerXpLevel( oPlayer.m_xuid );
 
 					if ( oPlayer.m_oStats[ stat ] !== newStatValue )
@@ -1558,6 +1562,10 @@ var Scoreboard = ( function()
 						if ( newStatValue > 0 )
 						{
 							var imagepath = "file://{images}/icons/xp/level" + newStatValue + ".png";
+						}
+						else
+						{
+							var imagepath = "";
 						}
 
 						elRankImage.SetImage( imagepath );
@@ -3251,10 +3259,7 @@ var Scoreboard = ( function()
 		_UpdateHLTVViewerNumber( 0 );
 
 		_UpdateMatchInfo();
-
-
 	};
-
 
 	function _RankRevealAll ()
 	{

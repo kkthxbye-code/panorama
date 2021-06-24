@@ -13,6 +13,7 @@
 	<scripts>
 		<include src="file://{resources}/scripts/generated/items_event_current_generated_store.js" />
 		<include src="file://{resources}/scripts/common/licenseutil.js" />
+		<include src="file://{resources}/scripts/common/iteminfo.js" />
 		<include src="file://{resources}/scripts/operation/operation_util.js"/>
 		<include src="file://{resources}/scripts/mainmenu_store.js" />
 	</scripts>
@@ -32,12 +33,15 @@
 			</Panel>
 		</snippet>
 
-		<snippet name="StoreEntry" class="">
+		<snippet name="LinkedStoreEntry" class="">
 			<Panel class="store-panel__carousel__item"  hittest="true">
-				<ItemImage id="StoreItemImage" class="store-panel__carousel__item__image" scaling="stretch-to-fit-preserve-aspect"  >
-					<Label id="StoreItemStattrak" class="store-panel__carousel__item__stattrak hidden" text="#CSGO_KillEater_Hud"/>
-					<Label id="StoreItemNew" class="store-panel__carousel__item__stattrak hidden" text="#Store_Price_New"/>
-				</ItemImage>
+				<Panel class="store-panel__carousel__item__images-linked" >
+					<ItemImage id="StoreItemImageLinked" class="store-panel__carousel__item__image store-panel__carousel__item__image--offset" scaling="stretch-to-fit-preserve-aspect" hittest="false" >
+						<Label id="StoreItemStattrak" class="store-panel__carousel__item__stattrak hidden" text="#CSGO_KillEater_Hud"/>
+						<Label id="StoreItemNew" class="store-panel__carousel__item__stattrak hidden" text="#Store_Price_New"/>
+					</ItemImage>
+					<ItemImage id="StoreItemImage" class="store-panel__carousel__item__image" scaling="stretch-to-fit-preserve-aspect" hittest="false"/>
+				</Panel>
 				<Label id="StoreItemName" class="store-panel__carousel__item__name stratum-font" text=""/>
 				<Panel class='left-right-flow full-width'>
 					<Label id="StoreItemPercent" class="store-sale-tag__text" text=""/>
@@ -61,12 +65,25 @@
 			<Panel class="store-panel__carousel__item"  hittest="true">
 				<Panel class="store-panel__carousel__item_primecontainer">
 					<ItemImage id="StoreItemImage" textureheight="80px" texturewidth="-1px" class="store-panel__carousel__item__image--prime"
-						scaling="stretch-to-fit-x-preserve-aspect" src="file://{images}/icons/ui/prime.svg" />
+						scaling="stretch-to-fit-x-preserve-aspect" src="file://{images}/icons/ui/prime_active.png" />
 					<Label class="store-panel__carousel__item__name stratum-font" html="true" text="#SFUI_Elevated_Status_SaleName"/>
+					<Label id="StoreItemSalePrice" class="store-panel__carousel__item__name saleprice" html="true" text=""/>
 				</Panel>
 				<Panel class="store-panel__carousel__item_primecontainer_detailed">
 					<Label id="StoreItemName" class="store-panel__carousel__item_primecontainer_title stratum-font" text="#SFUI_Elevated_Status_Sale_action"/>
 					<Label class="store-panel__carousel__item_prime_details stratum-font bottom-padding-medium" html="true" text="#SFUI_Elevated_Status_SaleDetails_desc"/>
+
+					<Panel class="left-right-flow bottom-padding">
+						<ItemImage id="StoreItemImage" textureheight="18px" texturewidth="-1px" class="store-panel__carousel__item_primecontainer_icon"
+						scaling="stretch-to-fit-x-preserve-aspect" src="file://{images}/icons/ui/trophy.svg" />
+						<Label class="store-panel__carousel__item_prime_details stratum-font" html="true" text="#SFUI_Elevated_Status_SaleDetails_4"/>
+					</Panel>
+
+										<Panel class="left-right-flow bottom-padding">
+						<ItemImage id="StoreItemImage" textureheight="18px" texturewidth="-1px" class="store-panel__carousel__item_primecontainer_icon"
+						scaling="stretch-to-fit-x-preserve-aspect" src="file://{images}/icons/ui/leader.svg" />
+						<Label class="store-panel__carousel__item_prime_details stratum-font" html="true" text="#SFUI_Elevated_Status_SaleDetails_5"/>
+					</Panel>
 
 					<Panel class="left-right-flow bottom-padding">
 						<ItemImage id="StoreItemImage" textureheight="18px" texturewidth="-1px" class="store-panel__carousel__item_primecontainer_icon"
@@ -90,7 +107,7 @@
 		</snippet>
 
 		<snippet name="StoreNavBtn">
-			<RadioButton class="news-panel-navbar-btn" onactivate="" selected="false">
+			<RadioButton class="news-panel-navbar-btn" selected="false">
 				                                                                                                                        
 				<Label id="StoreTabLabel" text=""/>
 			</RadioButton>
@@ -249,6 +266,11 @@
 			</Button>
 		</snippet>
 
+		<snippet name="ProTeams">
+			<Panel class="store-panel__proteams" hittest="false">
+				                            
+			</Panel >
+		</snippet>
 	</snippets>
 
 	<Panel class="news-panel news-panel--store-container MainMenuModeOnly" useglobalcontext="true">
@@ -257,7 +279,7 @@
 				html="true" text="#SFUI_LoginLicenseAssist_NoOnlineLicense"/>
 			<TextButton id="StorePanelLicenseBannerButton"
 				class="store-panel-license-banner__button PopupButton Positive"
-				onactivate="MyPersonaAPI.ActionBuyLicense();"
+				onactivate="MainMenuStore.ActionBuyLicense();"
 				selected="false" html="true"
 				text="#Store_Get_License"/>
 		</Panel>

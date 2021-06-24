@@ -448,11 +448,19 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 	background-color: none;
 	box-shadow: none;
 
-	transition-property:  wash-color, background-color;
+	transition-property:  wash-color, background-color, brightness;
 	transition-duration: .25s;
 	transition-timing-function: ease-in-out;
 
 	sound: "UIPanorama.mainmenu_rollover";
+}
+
+.mainmenu-navbar__btn-small.colored-icon:selected Image,
+.mainmenu-navbar__btn-small.colored-icon:enabled:hover Image,
+.mainmenu-navbar__btn-small.colored-icon:enabled:hover Image
+{
+	brightness: .3;
+	wash-color: none;
 }
 
   
@@ -822,7 +830,8 @@ CSGOEndOfMatch.mainmenu-content__container
 	height: 96px;
 	horizontal-align: center;
 	vertical-align: middle;
-	tooltip-position: bottom;
+	tooltip-position: right;
+	tooltip-body-position: 50% 100%;
 	background-color: gradient( linear, 0% 100%, 0% 99%, from( white ), color-stop( 0, #ffffff00 ), to( #ffffff00 ) );
 	flow-children: right;
 	sound-trans: "";
